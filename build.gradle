@@ -1,0 +1,119 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30"
+    }
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'pro.streem.pbandk') {
+            details.useVersion "0.10.0"
+        }
+    }
+}
+
+subprojects { subProject ->
+    subProject.configurations.all { configuration ->
+        // Workaround for kapt bug with MPP dependencies
+        // https://youtrack.jetbrains.com/issue/KT-31641
+        // https://youtrack.jetbrains.com/issue/KT-33206
+        if (name.contains('kapt')) {
+            attributes.attribute(Usage.USAGE_ATTRIBUTE, subProject.objects.named(Usage.class, Usage.JAVA_RUNTIME))
+        }
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+        }
+        maven { url 'https://jitpack.io' }
+    }
+
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+// Define versions in a single place
+ext.versions = [
+        'apkNamePrefix'              : "foodish",
+        'majorNumber'                : 1,
+        'minorNumber'                : 1,
+        'sprintNumber'               : 1,
+
+        // Sdk and tools
+        'minSdkVersion'              : 21, //5.1
+        'targetSdkVersion'           : 30,
+        'compileSdkVersion'          : 30,
+
+        // Test packages
+        'junitVersion'               : '4.12',
+        'runnerVersion'              : '1.2.0',
+        'espressoCoreVersion'        : '3.2.0',
+
+        // App dependencies
+        'supportLibraryVersion'      : '28.0.0-rc02',
+        'constraintLayoutVersion'    : '2.1.0-alpha1',
+        'appCompactVersion'          : '1.1.0',
+        'coreVersion'                : '1.2.0',
+
+        'annotation'                 : '1.1.0',
+        'material'                   : '1.1.0',
+        'lifecycleExtensions'        : '2.2.0',
+        'cardview'                   : '1.0.0',
+        'recyclerview'               : '1.2.1',
+
+        //Firebase
+        'firebaseCoreVersion'        : '17.2.0',
+        'firebaseRemoteConfigVersion': '19.0.3',
+        'crashlyticsVersion'         : '2.10.1',
+        'firebaseAnalyticsVersion'   : '17.2.1',
+        'firebaseMessaging'          : '19.0.1',
+
+        //Retrofit
+        'retrofit'                   : '2.9.0',
+        'interceptor'                : '4.9.0',
+        'gson'                       : '2.8.7',
+
+        //RX
+        'rxandroid'                  : '2.0.2',
+        'rxjava'                     : '2.1.16',
+
+        //Glide
+        'glide'                      : '4.9.0',
+
+        //Facebook
+        'facebook'                   : '5.8.0',
+
+        //Twitter
+        'twitter'                    : '3.3.0',
+
+        //Google
+        'googleAuth'                 : '17.0.0',
+
+        //Multi dex
+        'multidex'                   : '2.0.1',
+
+        //Room
+        'room_version'               : '2.2.4',
+
+        //Paging
+        'paging_version'             : '2.1.2',
+
+        //Work manager
+        'work'                       : '2.5.0'
+
+]

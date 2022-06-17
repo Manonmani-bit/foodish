@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.foodish">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.example.foodish.common.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/food_launcher_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/food_launcher_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Foodish">
+        <activity
+            android:name="com.example.foodish.modules.home.breed.data.ui.BreedListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.foodish.modules.home.breed.data.ui.FruitDrinkListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.foodish.modules.home.breed.data.ui.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.login.ui.ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".modules.splash.ui.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

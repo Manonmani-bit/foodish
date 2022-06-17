@@ -1,0 +1,2 @@
+rootProject.name = "Foodish"
+include ':app'
